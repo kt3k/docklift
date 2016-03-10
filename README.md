@@ -27,6 +27,10 @@ Then, invoke the script with `docklift` command
 
 The above command automatically find the `docklift.js` and executes the command in it. In this case it stops and removes the first running container.
 
+# Name
+
+`docklift` lifts up the ability of `docker` by its scripting power.
+
 # License
 
 MIT
