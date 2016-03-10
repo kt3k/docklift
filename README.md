@@ -1,18 +1,17 @@
-# DockerScript v0.1.0
+# docklift v0.1.0
 
 > Docker's Scripting Interface
 
 # Install
 
-    npm install dockerscript
-    npm install -g dsi
+    npm install docklift
 
 # How to use
 
-First, create `dockerscript.js` like the following:
+First, create `docklift.js` like the following:
 
 ```js
-var docker = require('dockerscript')
+var docker = require('docklift').docker
 
 var runningContainers = docker.ps()
 
@@ -22,11 +21,11 @@ docker.stop(ctr)
 docker.rm(ctr)
 ```
 
-Then, invoke the script with `dsi` command
+Then, invoke the script with `docklift` command
 
-    dsi
+    docklift
 
-The above command automatically find the `dockerscript.js` and executes the command in it. In this case it stops and removes the first running container.
+The above command automatically find the `docklift.js` and executes the command in it. In this case it stops and removes the first running container.
 
 # License
 
