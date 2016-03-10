@@ -1,0 +1,26 @@
+{
+  "name": "dockerscript",
+  "version": "0.1.0",
+  "description": "Docker's Scripting Interface",
+  "main": "lib/index.js",
+  "bin": {
+    "dockerscript": "dsi.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kt3k/dockerscript.git"
+  },
+  "keywords": [
+    "docker",
+    "container"
+  ],
+  "author": "Yoshiya Hinosawa <stibium121@gmail.com> (https://twitter.com/kt3k)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kt3k/dockerscript/issues"
+  },
+  "homepage": "https://github.com/kt3k/dockerscript#readme"
+}
