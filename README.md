@@ -8,24 +8,42 @@
 
 # How to use
 
-First, create `docklift.js` like the following:
+docklift.babel.js
 
 ```js
-var docker = require('docklift').docker
+import {task, Container} from 'docklift'
 
-var runningContainers = docker.ps()
+const MYSQL_CTR = 'mysql-container-' + process.env.MYSQL_PORT
+const ctr = Container.ofName(MYSQL_CTR)
 
-var ctr = runningContainers[0]
+task('start-mysql-container', () => {
 
-docker.stop(ctr)
-docker.rm(ctr)
+  await ctr.run()
+
+})
+
+task('kill-mysql-container', () => {
+
+  if (ctr.isRunning()) {
+
+    await ctr.stop()
+
+  }
+
+  if (ctr.exists()) {
+
+    await ctr.remove()
+
+  }
+
+})
 ```
 
 Then, invoke the script with `docklift` command
 
-    docklift
+    docklift start-mysql-container
 
-The above command automatically find the `docklift.js` and executes the command in it. In this case it stops and removes the first running container.
+The above command automatically find the `docklift.js` and executes the command in it. In this case it starts the container of the given name.
 
 # Name
 
