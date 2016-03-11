@@ -1,6 +1,6 @@
 # docklift v0.1.0 (WIP)
 
-> Docker's Scripting Interface
+> Docker's Scripting Interface (not working yet)
 
 # Install
 
