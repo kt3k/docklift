@@ -1,3 +1,6 @@
+# TODO
+- Container model
+
 # DOING
 - ps        List containers
 
