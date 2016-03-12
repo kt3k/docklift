@@ -27,7 +27,22 @@ export default class Container {
    */
   start() {
 
-    dockerode
+    return new Promise((resolve, reject) => {
+
+      dockerode.getContainer(this.id).start((err, data) {
+
+        if (err) {
+
+          reject(err)
+          return
+
+        }
+
+        resolve(ContainerRepository.apiDataToContainer(data))
+
+      })
+
+    })
 
   }
 

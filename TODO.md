@@ -1,10 +1,11 @@
 # TODO
-- Container model
-
-# DOING
-- ps        List containers
+- creates the container
+- starts the container
+- stops the container
+- removes the container
 
 # TODO
+- ps        List containers
 - attach    Attach to a running container
 - build     Build an image from a Dockerfile
 - commit    Create a new image from a container's changes
@@ -47,3 +48,6 @@
 - wait      Block until a container stops, then print its exit code
 
 # DONE
+- gets the container
+- modeling Container
+- modeling Image

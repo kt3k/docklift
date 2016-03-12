@@ -39,7 +39,7 @@ export default class ContainerRepository {
           return
         }
 
-        resolve(this.apiDataToContainer(data))
+        resolve(ContainerRepository.apiDataToContainer(data))
 
       })
 
@@ -54,7 +54,7 @@ export default class ContainerRepository {
    * @param {object} data The object which is returned from Docker Remote API
    * @return {Container}
    */
-  apiDataToContainer(data) {
+  static apiDataToContainer(data) {
 
     const container = new Container(data.Id, data.Image, data.Name, data.State.Running)
 
