@@ -8,33 +8,22 @@
 
 # How to use
 
-docklift.babel.js
+First, create `docklift.babel.js` file like the following:
 
 ```js
-import {task, Container} from 'docklift'
+import {task} from 'docklift'
 
-const MYSQL_CTR = 'mysql-container-' + process.env.MYSQL_PORT
-const ctr = Container.ofName(MYSQL_CTR)
+const MY_CONTAINER_NAME = 'my-container-' + process.env.MY_PORT
 
-task('start-mysql-container', () => {
+task('start-mysql-container').container({name: MYSQL_CTR})(container => {
 
-  await ctr.run()
+  return container.start({port: '3306:3306'})
 
 })
 
-task('kill-mysql-container', () => {
+task('kill-mysql-container').container({name: MYSQL_CTR})(container => {
 
-  if (ctr.isRunning()) {
-
-    await ctr.stop()
-
-  }
-
-  if (ctr.exists()) {
-
-    await ctr.remove()
-
-  }
+  return container.stop().then(() => container.remove())
 
 })
 ```
