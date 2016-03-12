@@ -15,13 +15,13 @@ import {task} from 'docklift'
 
 const MY_CONTAINER_NAME = 'my-container-' + process.env.MY_PORT
 
-task('start-mysql-container').container({name: MYSQL_CTR})(container => {
+task('start-my-container').container({name: MY_CONTAINER_NAME})(container => {
 
   return container.start({port: '3306:3306'})
 
 })
 
-task('kill-mysql-container').container({name: MYSQL_CTR})(container => {
+task('kill-my-container').container({name: MY_CONTAINER_NAME})(container => {
 
   return container.stop().then(() => container.remove())
 
@@ -30,7 +30,7 @@ task('kill-mysql-container').container({name: MYSQL_CTR})(container => {
 
 Then, invoke the script with `docklift` command
 
-    docklift start-mysql-container
+    docklift start-my-container
 
 The above command automatically find the `docklift.js` and executes the command in it. In this case it starts the container of the given name.
 
