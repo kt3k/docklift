@@ -1,4 +1,4 @@
-import dockerode from '../dockerode'
+import {dockerode} from '../util'
 
 /**
  * The container model.
@@ -29,7 +29,7 @@ export default class Container {
 
     return new Promise((resolve, reject) => {
 
-      dockerode.getContainer(this.id).start((err, data) {
+      dockerode.getContainer(this.id).start((err, data) => {
 
         if (err) {
 

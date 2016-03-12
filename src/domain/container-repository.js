@@ -1,6 +1,5 @@
-import dockerode from '../dockerode'
+import {dockerode, Promise} from '../util'
 import Container from './container'
-import {Promise} from 'es6-promise'
 
 export default class ContainerRepository {
 
