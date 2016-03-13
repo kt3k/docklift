@@ -1,4 +1,4 @@
-# docklift v0.1.1 (WIP)
+# docklift v0.2.0 (WIP)
 
 > Docker's Scripting Interface (not working yet)
 
