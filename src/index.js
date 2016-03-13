@@ -1,5 +1,22 @@
+import {createTask, orchestrator} from './application/task-modifier'
 
+/*
+ * @param {string} taskName The task name
+ * @param {string|Array<string>} deps (The list of) the dependency task names
+ */
+export function task(taskName, deps) {
 
-const task = () => {}
+  return createTask(taskName, deps)
 
-export {task}
+}
+
+/**
+ * Starts the task.
+ *
+ * @param {Array<string>} taskNames The task names
+ */
+export function start(...taskNames) {
+
+  return orchestrator.start(...taskNames)
+
+}
