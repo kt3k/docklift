@@ -1,4 +1,5 @@
 import {dockerode} from '../util'
+import ContainerRepository from './container-repository'
 
 /**
  * The container model.
@@ -60,7 +61,7 @@ export default class Container {
    */
   remove() {
 
-    return new ConainerRepository().remove(this)
+    return new ContainerRepository().remove(this)
 
   }
 
