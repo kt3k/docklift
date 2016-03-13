@@ -33,8 +33,9 @@ function main(argv = {}) {
 }
 
 /**
+ * The handler of launching of `liftoff`.
  * @param {string} modulePath The local docklift module path
- * @param {string} configPath The user docklift file path
+ * @param {string} configPath The user's docklift file path
  */
 function onLaunch({modulePath, configPath}) {
 
@@ -57,7 +58,11 @@ function onLaunch({modulePath, configPath}) {
 
   console.log('Using docklift file:', chalk.magenta(configPath))
 
+  // The shared docklift module which stores all the information the user creates
   const docklift = require(modulePath)
+
+  // executes the user's docklift.js
+  require(configPath)
 
   if (docklift.isEmpty()) {
 
