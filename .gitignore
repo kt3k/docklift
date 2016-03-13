@@ -3,3 +3,6 @@
 
 # dist
 /lib
+
+# sample file (for testing purpose)
+/docklift.js
