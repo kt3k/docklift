@@ -34,7 +34,8 @@
     "dockerode": "^2.2.9",
     "es6-promise": "^3.1.2",
     "interpret": "^1.0.0",
-    "liftoff": "^2.2.0"
+    "liftoff": "^2.2.0",
+    "orchestrator": "^0.3.7"
   },
   "devDependencies": {
     "babel-cli": "^6.6.5",
