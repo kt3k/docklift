@@ -22,9 +22,47 @@ export default class ContainerAction {
   /**
    * @return {Promise<Array<Container>>}
    */
-  getContainerModel() {
+  getContainerModels() {
 
-    return Promise.all(this.containers.map(container => repository.getById(container))).then(containerModels => this.containerModels = containerModels)
+    return Promise.all(this.containers.map(ContainerAction.getContainerModel))
+      .then(containerModels => this.containerModels = containerModels)
+
+  }
+
+  /**
+   * @param {any} container
+   */
+  static getContainerModel(container) {
+
+    if (typeof container === 'string') {
+
+      const containerNameOrId = container
+
+      return repository.getById(containerNameOrId)
+
+    }
+
+    if (!(typeof container === 'object')) {
+
+      throw new Error('Unable to create container from: ' + container)
+
+    }
+
+    container = factory.createFromObject(container)
+
+    if (container.isCreatable()) {
+
+      return repository.save(container)
+
+    }
+
+    if (container.hasName()) {
+
+      return repository.getByName(container.name)
+
+    }
+
+    throw new Error('Unable to handle container: ' + JSON.stringify(container))
 
   }
 

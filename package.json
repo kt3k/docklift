@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "test-repo": "babel-node casual-tests/repo-test0.js",
+    "test-repo0": "babel-node casual-tests/repo-test0.js",
+    "test-repo1": "babel-node casual-tests/repo-test1.js",
     "lint": "souffle",
     "clean": "rimraf lib",
     "dist": "babel src -d lib",

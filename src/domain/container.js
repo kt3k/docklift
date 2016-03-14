@@ -8,15 +8,18 @@ export default class Container {
 
   /**
    * @param {string} id The id
-   * @param {string} imageId The id of the image
    * @param {string} name The name of the container
+   * @param {string} imageId The id of the image
+   * @param {string} image The name of the image
+   * @param {string} cmd The command of the image
    * @param {boolean} isRunning true if it's running, false otherwise.
    */
-  constructor(id, imageId, name, isRunning) {
+  constructor(id, name, image, cmd, isRunning) {
 
     this.id = id
-    this.imageId = imageId
     this.name = name
+    this.image = image
+    this.cmd = cmd
     this.isRunning = isRunning
 
   }
@@ -62,6 +65,33 @@ export default class Container {
   remove() {
 
     return new ContainerRepository().remove(this)
+
+  }
+
+  /**
+   * Returns true iff the container has the id.
+   */
+  hasId() {
+
+    return this.id != null
+
+  }
+
+  /**
+   * Returns true iff it has the image id.
+   */
+  hasImageId() {
+
+    return this.imageId != null
+
+  }
+
+  /**
+   * Returns true iff this container has enough properties for being created.
+   */
+  isCreatable() {
+
+    return this.image != null
 
   }
 

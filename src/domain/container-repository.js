@@ -7,8 +7,45 @@ export default class ContainerRepository {
    * Saves the container.
    *
    * @param {Container} container The container
+   * @return {Promise<Container>}
    */
   save(container) {
+
+    if (container.hasId()) {
+
+      // does nothing because this container already has an id, which means it already exists in docker host.
+      return Promise.resolve(container)
+
+    }
+
+    return new Promise(resolve => {
+
+      dockerode.createContainer(this.containerToCreateOptions(container), (err, ctr) => {
+
+        if (err) { reject(err) }
+
+        resolve(ctr)
+
+      })
+
+    }).then(ctr => this.getById(ctr.id))
+
+  }
+
+  /**
+   * Creates the create options for a new container from the given container.
+   * @private
+   * @param {Container} container The container
+   */
+  containerToCreateOptions(container) {
+
+
+    return {
+      Image: container.image,
+      Cmd: typeof container.cmd === 'string' ? container.cmd.split(/\s+/) : null,
+      name: container.name
+    }
+
   }
 
   /**
@@ -55,7 +92,7 @@ export default class ContainerRepository {
    */
   static apiDataToContainer(data) {
 
-    const container = new Container(data.Id, data.Image, data.Name, data.State.Running)
+    const container = new Container(data.Id, data.Name, data.Image, data.State.Running)
 
     return container
 
