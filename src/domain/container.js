@@ -42,7 +42,17 @@ export default class Container {
 
         }
 
-        resolve(ContainerRepository.apiDataToContainer(data))
+        new ContainerRepository().getById(data.Id).then(container => {
+
+          this.id = container.id
+          this.image = container.image
+          this.name = container.name
+          this.cmd = container.cmd
+          this.isRunning = container.isRunning
+
+          resolve(this)
+
+        })
 
       })
 
