@@ -18,19 +18,19 @@ export default class ContainerRepository {
 
     }
 
-    return new Promise((resolve, reject) => dockerode.createContainer(
+    return new Promise((resolve, reject) => dockerode.createContainer(this.containerToCreateOptions(container), (err, ctr) => {
 
-      this.containerToCreateOptions(container),
-      (err, ctr) => err ? reject(err) : resolve(ctr)
+      if (err) {
 
-    ))
+        return reject(err)
 
-    .then(ctr => {
+      }
 
       container.id = ctr.id
-      return container.update()
 
-    })
+      return resolve(container.update())
+
+    }))
 
   }
 
@@ -52,7 +52,6 @@ export default class ContainerRepository {
 
   /**
    * Gets the container by its id. Returns null promise if the container does not exist.
-   *
    * @param {string} id The id of the container
    * @return {Promise<Container>}
    */
@@ -62,22 +61,19 @@ export default class ContainerRepository {
 
       dockerode.getContainer(id).inspect((err, data) => {
 
-        if (err) {
+        if (!err) {
 
-          if (err.statusCode === 404) {
+          return resolve(ContainerRepository.apiDataToContainer(data))
 
-            resolve(null)
-
-          } else {
-
-            reject(err)
-
-          }
-
-          return
         }
 
-        resolve(ContainerRepository.apiDataToContainer(data))
+        if (err.statusCode === 404) {
+
+          return resolve(null)
+
+        }
+
+        return reject(err)
 
       })
 
@@ -94,9 +90,7 @@ export default class ContainerRepository {
    */
   static apiDataToContainer(data) {
 
-    const container = new Container(data.Id, data.Name, data.Image, data.Config.Cmd.join(' '), data.State.Running)
-
-    return container
+    return new Container(data.Id, data.Name, data.Image, data.Config.Cmd.join(' '), data.State.Running)
 
   }
 
