@@ -92,7 +92,7 @@ export default class ContainerRepository {
    */
   static apiDataToContainer(data) {
 
-    const container = new Container(data.Id, data.Name, data.Image, data.State.Running)
+    const container = new Container(data.Id, data.Name, data.Image, data.Config.Cmd.join(' '), data.State.Running)
 
     return container
 

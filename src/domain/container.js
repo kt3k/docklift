@@ -1,4 +1,4 @@
-import {dockerode} from '../util'
+import {dockerode, wait} from '../util'
 import ContainerRepository from './container-repository'
 
 /**
@@ -33,28 +33,19 @@ export default class Container {
 
     return new Promise((resolve, reject) => {
 
-      dockerode.getContainer(this.id).start((err, data) => {
+      dockerode.getContainer(this.id).start(err => err ? reject(err) : resolve())
 
-        if (err) {
+    })
 
-          reject(err)
-          return
+    .then(() => new ContainerRepository().getById(this.id))
 
-        }
+    .then(container => {
 
-        new ContainerRepository().getById(data.Id).then(container => {
-
-          this.id = container.id
-          this.image = container.image
-          this.name = container.name
-          this.cmd = container.cmd
-          this.isRunning = container.isRunning
-
-          resolve(this)
-
-        })
-
-      })
+      this.id = container.id
+      this.image = container.image
+      this.name = container.name
+      this.cmd = container.cmd
+      this.isRunning = container.isRunning
 
     })
 

@@ -1,6 +1,4 @@
 # TODO
-- creates the container
-- starts the container
 - stops the container
 - removes the container
 
@@ -48,6 +46,8 @@
 - wait      Block until a container stops, then print its exit code
 
 # DONE
+- creates the container
+- starts the container
 - gets the container
 - modeling Container
 - modeling Image

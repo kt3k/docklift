@@ -10,10 +10,9 @@ const container = factory.createFromObject({
 
 repo.save(container).then(container => {
 
+  console.log('saved')
   console.log(container)
 
-  return container.start().then((container) => {
-    console.log(container)
-  })
+  return container.start().then(() => console.log(container))
 
-}).catch(err => console.log(err))
+}).catch(err => console.log(err.stack))

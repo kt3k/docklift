@@ -11,6 +11,7 @@
     "test-repo0": "babel-node casual-tests/repo-test0.js",
     "test-repo1": "babel-node casual-tests/repo-test1.js",
     "test-start": "babel-node casual-tests/start-container.js",
+    "docker-rm-all": "docker rm -f `docker ps -aq`",
     "lint": "souffle",
     "clean": "rimraf lib",
     "dist": "babel src -d lib",
