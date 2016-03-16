@@ -1,4 +1,4 @@
-import {containerFactory, containerRepository, dice} from '../helper'
+import {containerFactory as factory, containerRepository as repo, dice} from '../helper'
 
 import {expect} from 'chai'
 
@@ -8,13 +8,34 @@ describe('Container', () => {
 
     it('starts the container', () => {
 
-      const container = containerFactory.createFromObject({name: 'test-' + dice(65536), image: 'siomiz/chrome'})
+      const name = `foo${dice()}`
 
-      return containerRepository.save(container).then(container => {
+      const container = factory.createFromObject({name: name, image: 'siomiz/chrome'})
+
+      return repo.save(container).then(container => {
 
         return container.start().then(() => expect(container.isRunning).to.be.true)
 
       })
+
+    })
+
+  })
+
+  describe('stop', () => {
+
+    it('stops the container', () => {
+
+      const name = `foo${dice()}`
+
+      const container = factory.createFromObject({name: name, image: 'siomiz/chrome'})
+
+      return repo.save(container)
+
+        .then(() => container.start())
+        .then(() => expect(container.isRunning).to.be.true)
+        .then(() => container.stop())
+        .then(() => expect(container.isRunning).to.be.false)
 
     })
 

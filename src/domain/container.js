@@ -9,7 +9,6 @@ export default class Container {
   /**
    * @param {string} id The id
    * @param {string} name The name of the container
-   * @param {string} imageId The id of the image
    * @param {string} image The name of the image
    * @param {string} cmd The command of the image
    * @param {boolean} isRunning true if it's running, false otherwise.
@@ -25,21 +24,13 @@ export default class Container {
   }
 
   /**
-   * Starts the container.
-   *
-   * @return {Promise}
+   * Gets the same container from docker and update itself.
+   * @private
+   * @return {Promise<Container>}
    */
-  start() {
+  update() {
 
-    return new Promise((resolve, reject) => {
-
-      dockerode.getContainer(this.id).start(err => err ? reject(err) : resolve())
-
-    })
-
-    .then(() => new ContainerRepository().getById(this.id))
-
-    .then(container => {
+    return new ContainerRepository().getById(this.id).then(container => {
 
       this.id = container.id
       this.image = container.image
@@ -47,20 +38,50 @@ export default class Container {
       this.cmd = container.cmd
       this.isRunning = container.isRunning
 
+      return this
+
     })
 
   }
 
   /**
-   * Stops the container.
-   *
+   * Starts the container and returns the promise of itself.
+   * @return {Promise<Container>}
+   */
+  start() {
+
+    return new Promise((resolve, reject) => {
+
+      dockerode.getContainer(this.id).start(err => err ? reject(err) : resolve())
+
+    }).then(() => this.update())
+
+  }
+
+  /**
+   * Stops the container and returns the promise of itself.
    * @return {Promise}
    */
-  stop() {}
+  stop() {
+
+    return new Promise((resolve, reject) => {
+
+      dockerode.getContainer(this.id).stop(err => err ? reject(err) : resolve())
+
+    }).then(() => this.update(), err => {
+
+      if (err.statusCode === 304) { // The container is already stopped
+        return
+      }
+
+      throw err
+
+    })
+
+  }
 
   /**
    * Removes the container.
-   *
    * @return {Promise}
    */
   remove() {
@@ -75,15 +96,6 @@ export default class Container {
   hasId() {
 
     return this.id != null
-
-  }
-
-  /**
-   * Returns true iff it has the image id.
-   */
-  hasImageId() {
-
-    return this.imageId != null
 
   }
 

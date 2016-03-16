@@ -8,9 +8,7 @@
   },
   "scripts": {
     "test": "_mocha --require babel-register spec/**/*",
-    "test-repo0": "babel-node casual-tests/repo-test0.js",
-    "test-repo1": "babel-node casual-tests/repo-test1.js",
-    "test-start": "babel-node casual-tests/start-container.js",
+    "test-stop": "babel-node casual-tests/stop-container.js",
     "docker-rm-all": "docker rm -f `docker ps -aq`",
     "lint": "souffle",
     "clean": "rimraf lib",

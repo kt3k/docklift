@@ -13,22 +13,24 @@ export default class ContainerRepository {
 
     if (container.hasId()) {
 
-      // does nothing because this container already has an id, which means it already exists in docker host.
-      return Promise.resolve(container)
+      // Does nothing and just updates the container
+      return container.update()
 
     }
 
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => dockerode.createContainer(
 
-      dockerode.createContainer(this.containerToCreateOptions(container), (err, ctr) => {
+      this.containerToCreateOptions(container),
+      (err, ctr) => err ? reject(err) : resolve(ctr)
 
-        if (err) { reject(err) }
+    ))
 
-        resolve(ctr)
+    .then(ctr => {
 
-      })
+      container.id = ctr.id
+      return container.update()
 
-    }).then(ctr => this.getById(ctr.id))
+    })
 
   }
 

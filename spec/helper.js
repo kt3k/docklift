@@ -6,7 +6,7 @@ export const containerRepository = new ContainerRepository()
 
 /**
  * Generates a random number < n.
- * @param {number} n The upper limit of the random numbers
+ * @param {number} [n=65536] The upper limit of the random numbers
  * @return {number}
  */
-export const dice = (n) => Math.floor(Math.random() * n)
+export const dice = (n = 65536) => Math.floor(Math.random() * n)
