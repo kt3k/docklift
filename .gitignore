@@ -6,3 +6,7 @@
 
 # sample file (for testing purpose)
 /docklift.js
+
+# nyc
+/.nyc_output
+/coverage
