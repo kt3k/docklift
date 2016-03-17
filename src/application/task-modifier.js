@@ -11,32 +11,35 @@ export const orchestrator = new Orchestrator()
  */
 export function createTask(taskName, deps) {
 
-
   const builder = new TaskBuilder(taskName)
 
   orchestrator.add(taskName, deps, () => builder.getTask().execute())
 
-  /**
-   * Adds the behavior of the action.
-   * @param {Function} action The behavior o the action
-   */
-  const taskModifier = (action) => {
+  const taskModifier = {
 
-    builder.addAction(action)
+    /**
+     * Adds the behavior of the action.
+     * @param {Function} action The behavior o the action
+     */
+    do(action) {
 
-    return taskModifier
+      builder.addAction(action)
 
-  }
+      return taskModifier
 
-  /**
-   * Adds the containers
-   * @param {Array<string>|string} containers The ids of the containers to add
-   */
-  taskModifier.container = containers => {
+    },
 
-    builder.addContainers(containers)
+    /**
+     * Adds the containers
+     * @param {Array<string>|string} containers The ids of the containers to add
+     */
+    container(containers) {
 
-    return taskModifier
+      builder.addContainers(containers)
+
+      return taskModifier
+
+    }
 
   }
 

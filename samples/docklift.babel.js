@@ -1,10 +1,9 @@
 import {task} from './'
 
-task('start-my-container').container({
-  name: 'my-container',
-  image: 'siomiz/chrome'
-})(container => container.start())
+task('start')
+.container({ name: 'my-container', image: 'siomiz/chrome' })
+.do(container => container.start())
 
-task('kill-my-container').container({
-  name: 'my-container'
-})(container => container.remove())
+task('kill')
+.container({ name: 'my-container' })
+.do(container => container.remove())
