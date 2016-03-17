@@ -4,7 +4,7 @@
   "description": "Docker's Scripting Interface",
   "main": "lib/index.js",
   "bin": {
-    "docklift": "docklift.js"
+    "docklift": "bin/docklift.js"
   },
   "scripts": {
     "test": "_mocha --require babel-register spec/**/*",
@@ -37,6 +37,7 @@
     "es6-promise": "^3.1.2",
     "interpret": "^1.0.0",
     "liftoff": "^2.2.0",
+    "minimist": "^1.2.0",
     "orchestrator": "^0.3.7"
   },
   "devDependencies": {

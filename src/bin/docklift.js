@@ -1,9 +1,10 @@
 import Liftoff from 'liftoff'
 import {jsVariants} from 'interpret'
 import chalk from 'chalk'
+import minimist from 'minimist'
 
 // creates a liftoff instance
-const docklift = new Liftoff({
+const liftoff = new Liftoff({
   name: 'docklift',
   configName: 'docklift',
   extensions: jsVariants
@@ -19,16 +20,16 @@ const docklift = new Liftoff({
   console.error('Failed to load external module', chalk.magenta(name))
 })
 
-main()
+main(minimist(process.argv.slice(2)))
 
 /**
  * The entry point of the cli.
- * @param {object} argv The command line arguments
+ * @param {object} argv The command line arguments (parsed by `minimist`)
  */
-function main(argv = {}) {
+function main(argv) {
 
   // invokes the liftoff app
-  docklift.launch({cwd: argv.cwd, configPath: argv.docklift}, onLaunch)
+  liftoff.launch({cwd: argv.cwd, configPath: argv.docklift, modulePath: argv.modulePath}, (env) => onLaunch(env, argv._))
 
 }
 
@@ -37,7 +38,7 @@ function main(argv = {}) {
  * @param {string} modulePath The local docklift module path
  * @param {string} configPath The user's docklift file path
  */
-function onLaunch({modulePath, configPath}) {
+function onLaunch({modulePath, configPath}, commands) {
 
   if (!modulePath) {
 
@@ -66,10 +67,31 @@ function onLaunch({modulePath, configPath}) {
 
   if (docklift.isEmpty()) {
 
-    console.log(chalk.red('Error: No asset defined in bulbofile'))
-
-    process.exit()
+    console.log(chalk.red(`Error: No task defined in: ${configPath}`))
+    process.exit(1)
 
   }
+
+  if (commands.length === 0) {
+
+    console.log(chalk.red(`Error: No task specified`))
+    console.log(chalk.red(`Usage: docklift task-name`))
+    process.exit(1)
+
+  }
+
+  docklift.start(commands, err => {
+
+    if (err) {
+
+      console.log(chalk.red(err.stack))
+
+    } else {
+
+      console.log(chalk.green('Done'))
+
+    }
+
+  })
 
 }

@@ -3,7 +3,7 @@ import Task from './task'
 
 export default class TaskBuilder {
 
-  construtor(taskName) {
+  constructor(taskName) {
 
     this.task = new Task(taskName)
     this.currentAction = new ContainerAction()
@@ -46,7 +46,7 @@ export default class TaskBuilder {
 
     }
 
-    this.containers.forEach(container => this.addContainer(container))
+    containers.forEach(container => this.addContainer(container))
 
   }
 

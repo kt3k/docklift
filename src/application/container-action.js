@@ -1,7 +1,9 @@
 import {Promise} from '../util'
 import ContainerRepository from '../domain/container-repository'
+import ContainerFactory from '../domain/container-factory'
 
 const repository = new ContainerRepository()
+const factory = new ContainerFactory()
 
 export default class ContainerAction {
 
@@ -58,7 +60,16 @@ export default class ContainerAction {
 
     if (container.hasName()) {
 
-      return repository.getByName(container.name)
+      return repository.getByName(container.name).then(container0 => {
+
+        if (container0 == null) {
+
+          throw new Error(`The container does not exist: ${container.name}`)
+
+        }
+
+        return container0
+      })
 
     }
 
@@ -83,18 +94,18 @@ export default class ContainerAction {
 
     return this.getContainerModels().then(() => this.actions.reduce((promise, action) => {
 
-      return promise.then(() => this.applyActionToContainers(action))
+      return promise.then(() => this.applyActionToContainerModels(action))
 
     }, Promise.resolve()))
 
   }
 
   /**
-   * @param {Array<string>} containers The list of containers to add
+   * @param {any} container The something which represents a container
    */
-  addContainers(containers) {
+  addContainer(container) {
 
-    this.containers.push(...containers)
+    this.containers.push(container)
 
   }
 

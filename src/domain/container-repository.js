@@ -81,6 +81,17 @@ export default class ContainerRepository {
   }
 
   /**
+   * Gets a container by the given name.
+   * @param {string} name The name of the container
+   * @return {Promise<Container>}
+   */
+  getByName(name) {
+
+    return this.getById(name)
+
+  }
+
+  /**
    * Removes the container.
    * @param {Container} container The container
    * @return

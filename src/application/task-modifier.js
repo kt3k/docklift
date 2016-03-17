@@ -1,4 +1,4 @@
-import Orchestrator from './orchestrator'
+import Orchestrator from 'orchestrator'
 import TaskBuilder from './task-builder'
 
 export const orchestrator = new Orchestrator()
@@ -10,6 +10,7 @@ export const orchestrator = new Orchestrator()
  * @param {string|Array<string>} deps (The list of) the dependency task names
  */
 export function createTask(taskName, deps) {
+
 
   const builder = new TaskBuilder(taskName)
 
