@@ -1,18 +1,14 @@
 # TODO
-- stops the container
-- removes the container
-
-# TODO
 - ps        List containers
 - attach    Attach to a running container
 - build     Build an image from a Dockerfile
-- commit    Create a new image from a container's changes
+- commit    Create a new image from a containers changes
 - cp        Copy files/folders between a container and the local filesystem
 - create    Create a new container
-- diff      Inspect changes on a container's filesystem
+- diff      Inspect changes on a containers filesystem
 - events    Get real time events from the server
 - exec      Run a command in a running container
-- export    Export a container's filesystem as a tar archive
+- export    Export a containers filesystem as a tar archive
 - history   Show the history of an image
 - images    List images
 - import    Import the contents from a tarball to create a filesystem image
@@ -30,14 +26,11 @@
 - push      Push an image or a repository to a registry
 - rename    Rename a container
 - restart   Restart a container
-- rm        Remove one or more containers
 - rmi       Remove one or more images
 - run       Run a command in a new container
 - save      Save an image(s) to a tar archive
 - search    Search the Docker Hub for images
-- start     Start one or more stopped containers
 - stats     Display a live stream of container(s) resource usage statistics
-- stop      Stop a running container
 - tag       Tag an image into a repository
 - top       Display the running processes of a container
 - unpause   Unpause all processes within a container
@@ -46,6 +39,11 @@
 - wait      Block until a container stops, then print its exit code
 
 # DONE
+- rm        Remove one or more containers
+- start     Start one or more stopped containers
+- stop      Stop a running container
+- stops the container
+- removes the container
 - creates the container
 - starts the container
 - gets the container
