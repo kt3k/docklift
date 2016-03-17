@@ -1,4 +1,4 @@
-# docklift v0.3.0 (WIP)
+# docklift v0.4.0 (WIP)
 
 > Manage docker containers from Scripting Interface (not yet working)
 
