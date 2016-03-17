@@ -20,6 +20,7 @@ export default class Container {
     this.image = image
     this.cmd = cmd
     this.isRunning = isRunning
+    this.isRemoved = false
 
   }
 
@@ -105,6 +106,17 @@ export default class Container {
   isCreatable() {
 
     return this.image != null
+
+  }
+
+  /**
+   * Sets the state of the container removed
+   */
+  setRemoved() {
+
+    this.id = null
+    this.isRunning = false
+    this.isRemoved = true
 
   }
 

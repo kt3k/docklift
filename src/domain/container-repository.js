@@ -5,7 +5,6 @@ export default class ContainerRepository {
 
   /**
    * Saves the container.
-   *
    * @param {Container} container The container
    * @return {Promise<Container>}
    */
@@ -82,8 +81,22 @@ export default class ContainerRepository {
   }
 
   /**
+   * Removes the container.
+   * @param {Container} container The container
+   * @return
+   */
+  remove(container) {
+
+    return new Promise((resolve, reject) => {
+
+      dockerode.getContainer(container.id).remove({force: true}, (err, data) => err ? reject(err) : resolve())
+
+    }).then(() => container.setRemoved())
+
+  }
+
+  /**
    * Converts the api data to an container model.
-   *
    * @private
    * @param {object} data The object which is returned from Docker Remote API
    * @return {Container}
