@@ -5,7 +5,7 @@
 /lib
 
 # sample file (for testing purpose)
-/docklift.js
+/docklift.babel.js
 
 # nyc
 /.nyc_output
