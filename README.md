@@ -38,10 +38,10 @@ The above command automatically find the `docklift.js` and executes the command 
 
 The above kills and removes the container of the name `my-container-XXXX`
 
-# Name
-
-`docklift` lifts up the ability of `docker` by its scripting capability.
-
 # License
 
 MIT
+
+# Name
+
+`docklift` is a tool which lifts up the ability of `docker` by its scripting capability.
