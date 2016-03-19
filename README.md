@@ -1,10 +1,14 @@
-# docklift v0.4.0 (WIP)
+# docklift v0.4.0
 
-> Manage docker containers from Scripting Interface (not yet working)
+> Manage your docker containers from JavaScript
 
 # Install
 
     npm install docklift
+
+optionally (if you want to use es2015)
+
+    npm install babel-register babel-preset-es2015
 
 # How to use
 
@@ -13,7 +17,7 @@ First create `docklift.babel.js` file like the following:
 ```js
 import {task} from 'docklift'
 
-const MY_CONTAINER_NAME = 'my-container-' + process.env.MY_PORT
+const MY_CONTAINER_NAME = 'my-container-name'
 
 task('start-my-container').container({name: MY_CONTAINER_NAME})(container => {
 
@@ -28,15 +32,15 @@ task('kill-my-container').container({name: MY_CONTAINER_NAME})(container => {
 })
 ```
 
-Then, invoke the script with `docklift` command
+Then, invoke `docklift` command
 
-    docklift start-my-container
+    ./node_modules/.bin/docklift start-my-container
 
 The above command automatically find the `docklift.js` and executes the command in it. In this case it starts the container of the given name.
 
-    docklift kill-my-container
+    ./node_modules/.bin/docklift kill-my-container
 
-The above kills and removes the container of the name `my-container-XXXX`
+The above kills and removes the container of the same name `my-container-XXXX`
 
 # License
 
