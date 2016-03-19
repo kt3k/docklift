@@ -1,4 +1,4 @@
-# docklift v0.4.0
+# docklift v0.4.1
 
 > Manage your docker containers from JavaScript
 
