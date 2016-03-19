@@ -57,7 +57,11 @@
     ]
   },
   "souffle": {
-    "indent": 2
+    "indent": 2,
+    "globals": [
+      "describe",
+      "it"
+    ]
   },
   "nyc": {
     "exclude": [

@@ -1,4 +1,4 @@
-import {dockerode, wait} from '../util'
+import {dockerode} from '../util'
 import ContainerRepository from './container-repository'
 
 /**
