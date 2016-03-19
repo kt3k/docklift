@@ -1,5 +1,8 @@
 # TODO
+- circle ci test
 - port feature
+- cmd feature
+- volumes feature
 
 - ps        List containers
 - attach    Attach to a running container
