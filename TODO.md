@@ -3,6 +3,7 @@
 - port feature
 - cmd feature
 - volumes feature
+- env var feature
 
 - ps        List containers
 - attach    Attach to a running container
