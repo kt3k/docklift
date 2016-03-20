@@ -1,6 +1,7 @@
 import {Promise} from '../util'
 import ContainerRepository from '../domain/container-repository'
 import ContainerFactory from '../domain/container-factory'
+import Container from '../domain/container'
 
 const repository = new ContainerRepository()
 const factory = new ContainerFactory()
@@ -50,7 +51,7 @@ export default class ContainerAction {
 
     }
 
-    container = factory.createFromObject(container)
+    container = new Container(container)
 
     if (container.isCreatable()) {
 

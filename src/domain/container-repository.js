@@ -40,12 +40,13 @@ export default class ContainerRepository {
    */
   containerToCreateOptions(container) {
 
-
-    return {
+    const options = {
       Image: container.image,
       Cmd: typeof container.cmd === 'string' ? container.cmd.split(/\s+/) : null,
       name: container.name
     }
+
+    return options
 
   }
 
@@ -114,7 +115,13 @@ export default class ContainerRepository {
    */
   static apiDataToContainer(data) {
 
-    return new Container(data.Id, data.Name, data.Image, data.Config.Cmd.join(' '), data.State.Running)
+    return new Container({
+      id: data.Id,
+      name: data.Name,
+      image: data.Image,
+      cmd: data.Config.Cmd.join(' '),
+      isRunning: data.State.Running
+    })
 
   }
 

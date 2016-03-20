@@ -1,4 +1,5 @@
 import {containerFactory as factory, containerRepository as repo, dice} from '../helper'
+import Container from '../../src/domain/container'
 
 import {expect} from 'chai'
 
@@ -10,7 +11,7 @@ describe('Container', () => {
 
       const name = `foo${dice()}`
 
-      const container = factory.createFromObject({name: name, image: 'siomiz/chrome'})
+      const container = new Container({name: name, image: 'siomiz/chrome'})
 
       return repo.save(container).then(container => {
 
@@ -28,7 +29,7 @@ describe('Container', () => {
 
       const name = `foo${dice()}`
 
-      const container = factory.createFromObject({name: name, image: 'siomiz/chrome'})
+      const container = new Container({name: name, image: 'siomiz/chrome'})
 
       return repo.save(container)
 
