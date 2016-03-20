@@ -7,7 +7,7 @@
     "docklift": "bin/docklift.js"
   },
   "scripts": {
-    "test": "_mocha --require babel-register spec/**/*",
+    "test": "_mocha -t 10000 --require babel-register spec/**/*",
     "test-stop": "babel-node casual-tests/stop-container.js",
     "cov": "nyc --reporter=lcov npm test",
     "docker-rm-all": "docker rm -f `docker ps -aq`",
