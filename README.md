@@ -1,4 +1,4 @@
-# docklift v0.4.1 [![Circle CI](https://circleci.com/gh/kt3k/docklift.svg?style=svg)](https://circleci.com/gh/kt3k/docklift)
+# docklift v0.5.0 [![Circle CI](https://circleci.com/gh/kt3k/docklift.svg?style=svg)](https://circleci.com/gh/kt3k/docklift)
 
 > Manage your docker containers from JavaScript
 
