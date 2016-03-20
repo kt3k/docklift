@@ -5,7 +5,7 @@ describe('ContainerRepository', () => {
 
   describe('remove', () => {
 
-    it('removes the container', () => {
+    it.skipOnCI('removes the container', () => {
 
       const name = `test${dice()}`
       const container = factory.createFromObject({name: name, image: 'siomiz/chrome'})
