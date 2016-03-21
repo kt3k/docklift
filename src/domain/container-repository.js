@@ -187,7 +187,15 @@ export default class ContainerRepository {
 
     return new Promise((resolve, reject) => {
 
-      dockerode.getContainer(container.id).remove({force: true}, (err, data) => err ? reject(err) : resolve())
+      dockerode.getContainer(container.id).remove({force: true}, (err, data) => {
+
+        if (err) {
+          return reject(err)
+        }
+
+        return resolve()
+
+      })
 
     }).then(() => container.setRemoved())
 

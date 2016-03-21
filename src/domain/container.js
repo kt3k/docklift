@@ -56,7 +56,17 @@ export default class Container {
 
     return new Promise((resolve, reject) => {
 
-      dockerode.getContainer(this.id).start(err => err ? reject(err) : resolve())
+      dockerode.getContainer(this.id).start(err => {
+
+        if (err) {
+
+          return reject(err)
+
+        }
+
+        return resolve()
+
+      })
 
     }).then(() => this.update())
 
@@ -70,7 +80,17 @@ export default class Container {
 
     return new Promise((resolve, reject) => {
 
-      dockerode.getContainer(this.id).stop(err => err ? reject(err) : resolve())
+      dockerode.getContainer(this.id).stop(err => {
+
+        if (err) {
+
+          return reject(err)
+
+        }
+
+        return resolve()
+
+      })
 
     }).then(() => this.update(), err => {
 
