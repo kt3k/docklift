@@ -1,4 +1,4 @@
-import {containerRepository as repo, containerFactory as factory, dice} from '../helper'
+import {containerRepository as repo, dice} from '../helper'
 import Container from '../../src/domain/container'
 import {expect} from 'chai'
 

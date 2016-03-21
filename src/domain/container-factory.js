@@ -8,7 +8,7 @@ export default class ContainerFactory {
    */
   createFromName(name) {
 
-    return new Container({null, name, null, null, null})
+    return new Container({name})
 
   }
 

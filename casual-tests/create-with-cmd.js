@@ -3,8 +3,6 @@ import {
 } from '../spec/helper'
 import Container from '../src/domain/container'
 
-const id = 'a008c3237913'
-
 const cntr = new Container({
   name: 'test-create',
   image: 'ubuntu',
