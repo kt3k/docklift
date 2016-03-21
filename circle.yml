@@ -4,4 +4,5 @@ machine:
 
 dependencies:
   override:
+    - docker pull ubuntu
     - docker pull siomiz/chrome
