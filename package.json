@@ -1,6 +1,6 @@
 {
   "name": "docklift",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Docker's Scripting Interface",
   "main": "lib/index.js",
   "bin": {
