@@ -29,4 +29,22 @@ describe('ContainerRepository', () => {
 
   })
 
+  describe('save', () => {
+
+    it('saves the container with port forwarding options', () => {
+
+      const name = `foo${dice()}`
+
+      const container = new Container({name: name, image: 'ubuntu', cmd: 'vi', ports: ['9100:9100']})
+
+      return repo.save(container)
+
+      .then(() => repo.getById(name))
+
+      .then(container => expect(container.ports).to.eql(['9100:9100']))
+
+    })
+
+  })
+
 })

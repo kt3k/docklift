@@ -12,7 +12,7 @@ export default class Container {
    * @param {string} image The name of the image
    * @param {string} cmd The command of the image
    * @param {boolean} isRunning true if it's running, false otherwise.
-   * @param {object} ports The port bindings
+   * @param {Array<string>} ports The port bindings
    */
   constructor({id, name, image, cmd, isRunning, ports}) {
 
@@ -22,6 +22,7 @@ export default class Container {
     this.cmd = cmd
     this.isRunning = isRunning
     this.isRemoved = false
+    this.ports = ports
 
   }
 
@@ -39,6 +40,7 @@ export default class Container {
       this.name = container.name
       this.cmd = container.cmd
       this.isRunning = container.isRunning
+      this.ports = container.ports
 
       return this
 

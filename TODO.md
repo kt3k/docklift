@@ -1,7 +1,5 @@
 # TODO
-- circle ci test
-- port feature
-- cmd feature
+- use sinon in remove test because actual remove calls cause error in circle ci
 - volumes feature
 - env var feature
 
@@ -45,6 +43,9 @@
 - wait      Block until a container stops, then print its exit code
 
 # DONE
+- cmd feature
+- circle ci test
+- port feature
 - rm        Remove one or more containers
 - start     Start one or more stopped containers
 - stop      Stop a running container

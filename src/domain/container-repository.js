@@ -1,6 +1,9 @@
 import {dockerode, Promise} from '../util'
 import Container from './container'
 
+/**
+ * The repository class for the container models.
+ */
 export default class ContainerRepository {
 
   /**
@@ -43,10 +46,93 @@ export default class ContainerRepository {
     const options = {
       Image: container.image,
       Cmd: typeof container.cmd === 'string' ? container.cmd.split(/\s+/) : null,
-      name: container.name
+      name: container.name,
+      ExposedPorts: this.portsToExposedPorts(container.ports),
+      HostConfig: {
+         PortBindings: this.portsToPortBindings(container.ports)
+      }
     }
 
     return options
+
+  }
+
+  /**
+   * Converts the container's ports property to Remote API's ExposedPorts option.
+   * @param {Array<string>} ports The ports property
+   * @return {Object}
+   */
+  portsToExposedPorts(ports) {
+
+    if (!(ports instanceof Array)) {
+
+      return {}
+
+    }
+
+    const exposedPorts = {}
+
+    ports.forEach(portPair => {
+
+      const [hostPort, containerPort] = portPair.split(':', 2)
+
+      exposedPorts[containerPort + '/tcp'] = {}
+
+    })
+
+    return exposedPorts
+
+  }
+
+  /**
+   * Converts the ports options to PortBindings option for create API.
+   * @param {Array<string>} ports The ports settings (The form of ['3306:3306', '9100:9100']
+   * @return {Object}
+   */
+  portsToPortBindings(ports) {
+
+    const portBindings = {}
+
+    if (!(ports instanceof Array)) {
+
+      return portBindings
+
+    }
+
+    ports.forEach(portPair => {
+
+      const [hostPort, containerPort] = portPair.split(':', 2)
+
+      portBindings[containerPort + '/tcp'] = [{HostPort: '' + hostPort}]
+
+    })
+
+    return portBindings
+
+  }
+
+  /**
+   * @private
+   * @param {Object}
+   * @return {Array<string>}
+   */
+  static portBindingsToPorts(portBindings) {
+
+    if (portBindings == null) {
+
+      return []
+
+    }
+
+    return Object.keys(portBindings).map(containerPort => {
+
+      const hostPort = portBindings[containerPort][0].HostPort
+
+      containerPort = containerPort.split('/')[0]
+
+      return `${hostPort}:${containerPort}`
+
+    })
 
   }
 
@@ -120,7 +206,8 @@ export default class ContainerRepository {
       name: data.Name,
       image: data.Image,
       cmd: data.Config.Cmd.join(' '),
-      isRunning: data.State.Running
+      isRunning: data.State.Running,
+      ports: ContainerRepository.portBindingsToPorts(data.HostConfig.PortBindings)
     })
 
   }
