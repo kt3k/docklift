@@ -18,10 +18,15 @@ First create `docklift.babel.js` file like the following:
 import {task} from 'docklift'
 
 task('start-my-container')
-.container({name: 'my-container', image: 'my-container-image'})
+.container({
+  name: 'my-container',
+  image: 'ubuntu',
+  cmd: 'some-command',
+  ports: [process.env.MY_HOST_PORT + ':3000']
+})
 .do(container => {
 
-  return container.start({port: process.env.MY_PORT + ':3306'})
+  return container.start()
 
 })
 
@@ -46,7 +51,7 @@ The above kills and removes the container of the same name `my-container-XXXX`
 
 # API
 
-```
+```js
 import {task} from 'docklift'
 ```
 
