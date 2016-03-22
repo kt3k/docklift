@@ -1,7 +1,12 @@
 # TODO
 - use sinon in remove test because actual remove calls cause error in circle ci
-- volumes feature
-- env var feature
+- Add volumes feature
+- Add env var feature
+- Add Created property
+- Add Status property
+- image pull feature
+- image build feature
+- image remove feature
 
 - ps        List containers
 - attach    Attach to a running container
