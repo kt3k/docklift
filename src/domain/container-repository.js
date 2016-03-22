@@ -49,7 +49,7 @@ export default class ContainerRepository {
       name: container.name,
       ExposedPorts: this.portsToExposedPorts(container.ports),
       HostConfig: {
-         PortBindings: this.portsToPortBindings(container.ports)
+        PortBindings: this.portsToPortBindings(container.ports)
       }
     }
 
@@ -74,7 +74,7 @@ export default class ContainerRepository {
 
     ports.forEach(portPair => {
 
-      const [hostPort, containerPort] = portPair.split(':', 2)
+      const containerPort = portPair.split(':', 2)[1]
 
       exposedPorts[containerPort + '/tcp'] = {}
 

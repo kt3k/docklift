@@ -4,84 +4,42 @@ import Container from '../domain/container'
 
 const repository = new ContainerRepository()
 
+/**
+ * The pair of the list of the ways of obtaining containers and the list of actions on them.
+ */
 export default class ContainerAction {
 
   constructor() {
 
     /**
-     * @property {Array<string>} containers The list of the of the containers
+     * @property {ContainerObtain[]} obtains The list of the ways of obtaining containers
      */
-    this.containers = []
+    this.obtains = []
 
     /**
-     * @property {Array<Function>} actions The list of actions
+     * @property {Function[]} actions The list of actions
      */
     this.actions = []
 
   }
 
   /**
-   * @return {Promise<Array<Container>>}
+   * @return {Promise<Container[]>}
    */
-  getContainerModels() {
+  getContainers() {
 
-    return Promise.all(this.containers.map(ContainerAction.getContainerModel))
-      .then(containerModels => this.containerModels = containerModels)
+    return Promise.all(this.obtains.map(obtain => obtain.obtain()))
 
   }
 
   /**
-   * @param {any} container
-   */
-  static getContainerModel(container) {
-
-    if (typeof container === 'string') {
-
-      const containerNameOrId = container
-
-      return repository.getById(containerNameOrId)
-
-    }
-
-    if (!(typeof container === 'object')) {
-
-      throw new Error('Unable to create container from: ' + container)
-
-    }
-
-    container = new Container(container)
-
-    if (container.isCreatable()) {
-
-      return repository.save(container)
-
-    }
-
-    if (container.hasName()) {
-
-      return repository.getByName(container.name).then(container0 => {
-
-        if (container0 == null) {
-
-          throw new Error(`The container does not exist: ${container.name}`)
-
-        }
-
-        return container0
-      })
-
-    }
-
-    throw new Error('Unable to handle container: ' + JSON.stringify(container))
-
-  }
-
-  /**
+   * Applies the action on the given containers.
    * @param {Function} action The behavior of the action
+   * @param {Container[]} containers The containers
    */
-  applyActionToContainerModels(action) {
+  applyActionToContainers(action, containers) {
 
-    return Promise.all(this.containerModels.map(containerModel => action(containerModel)))
+    return Promise.all(containers.map(container => action(container)))
 
   }
 
@@ -91,24 +49,16 @@ export default class ContainerAction {
    */
   execute() {
 
-    return this.getContainerModels().then(() => this.actions.reduce((promise, action) => {
+    return this.getContainers().then(containers => this.actions.reduce((promise, action) => {
 
-      return promise.then(() => this.applyActionToContainerModels(action))
+      return promise.then(() => this.applyActionToContainers(action, containers))
 
     }, Promise.resolve()))
 
   }
 
   /**
-   * @param {any} container The something which represents a container
-   */
-  addContainer(container) {
-
-    this.containers.push(container)
-
-  }
-
-  /**
+   * Registers the action on containers.
    * @param {Function} action The action
    */
   addAction(action) {
@@ -118,12 +68,22 @@ export default class ContainerAction {
   }
 
   /**
+   * Registers the way of obtaining a container.
+   * @param {ContainerObtain} obtain The way of obtaining a container
+   */
+  addContainerObtain(obtain) {
+
+    this.obtains.push(obtain)
+
+  }
+
+  /**
    * Returns true if the action has any container, false otherwise.
    * @return {boolean}
    */
   hasContainer() {
 
-    return this.containers.length > 0
+    return this.obtains.length > 0
 
   }
 

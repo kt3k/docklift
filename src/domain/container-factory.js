@@ -30,7 +30,7 @@ export default class ContainerFactory {
 
     }
 
-    return
+    return new Container(obj)
   }
 
   /**

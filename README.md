@@ -18,7 +18,7 @@ First create `docklift.babel.js` file like the following:
 import {task} from 'docklift'
 
 task('start-my-container')
-.container({
+.create({
   name: 'my-container',
   image: 'ubuntu',
   cmd: 'some-command',
@@ -31,10 +31,10 @@ task('start-my-container')
 })
 
 task('kill-my-container')
-.container({name: 'my-container'})
+.get('my-container')
 .do(container => {
 
-  return container.stop().then(() => container.remove())
+  return container.remove()
 
 })
 ```
@@ -62,18 +62,22 @@ import {task} from 'docklift'
 
 Creates and registers a task of the given name. Returns task modifier and you can define your own container actions in the task.
 
-## task(taskName).container({name, image})
+## taskModifier.create({name, image, cmd, ports}[, ...]).do(action)
 
 - @param {string} name The name of the container
 - @param {string} image The image of the container (necessary only when creating container)
-
-The defines the container your work on in this task.
-
-## task(taskName).container({name, image}).do(action)
-
+- @param {string} cmd The command
+- @param {string|string[]} ports The port forwarding settings
 - @param {Function} action The action to perform
 
-`do` method defines what action is performed on the containers in the task.
+Creates the container(s) and perform the action(s) on it.
+
+## taskModifier.get(names).do(action)
+
+- @param {string|string[]} names The names of the container to get
+- @param {Function} action The action to perform
+
+Gets the container(s) and perform the action(s) on it.
 
 # Container class
 

@@ -7,7 +7,7 @@ export const orchestrator = new Orchestrator()
  * Creates a task of the given name and dependencies.
  *
  * @param {string} taskName The task name
- * @param {string|Array<string>} deps (The list of) the dependency task names
+ * @param {string|string[]} deps (The list of) the dependency task names
  */
 export function createTask(taskName, deps) {
 
@@ -15,7 +15,7 @@ export function createTask(taskName, deps) {
 
   orchestrator.add(taskName, deps, () => builder.getTask().execute())
 
-  const taskModifier = {
+  const modifier = {
 
     /**
      * Adds the behavior of the action.
@@ -25,24 +25,45 @@ export function createTask(taskName, deps) {
 
       builder.addAction(action)
 
-      return taskModifier
+      return modifier
 
     },
 
     /**
-     * Adds the containers
-     * @param {Array<string>|string} containers The ids of the containers to add
+     * @return {object}
      */
-    container(containers) {
+    get container() {
 
-      builder.addContainers(containers)
+      return modifier
 
-      return taskModifier
+    },
+
+    /**
+     * Adds the way of getting a container
+     * @param {string|string[]} names The names of the containers
+     */
+    get(names) {
+
+      builder.containerGet(names)
+
+      return modifier
+
+    },
+
+    /**
+     * Adds the way of creating a container
+     * @param {object|object[]} names The names of the containers
+     */
+    create(params) {
+
+      builder.containerCreate(params)
+
+      return modifier
 
     }
 
   }
 
-  return taskModifier
+  return modifier
 
 }
