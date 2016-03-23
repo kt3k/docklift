@@ -124,24 +124,6 @@ export default class Container {
   }
 
   /**
-   * Returns true iff the container has the name.
-   */
-  hasName() {
-
-    return this.name != null
-
-  }
-
-  /**
-   * Returns true iff this container has enough properties for being created.
-   */
-  isCreatable() {
-
-    return this.image != null
-
-  }
-
-  /**
    * Sets the state of the container removed
    */
   setRemoved() {
