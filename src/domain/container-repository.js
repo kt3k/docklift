@@ -212,7 +212,7 @@ export default class ContainerRepository {
     return new Container({
       id: data.Id,
       name: data.Name,
-      image: data.Image,
+      image: data.Config.Image,
       cmd: data.Config.Cmd.join(' '),
       isRunning: data.State.Running,
       ports: ContainerRepository.portBindingsToPorts(data.HostConfig.PortBindings)

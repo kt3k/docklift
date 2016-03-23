@@ -14,11 +14,7 @@ export default class ContainerCreate extends ContainerObtain {
 
     super()
 
-    console.log(obj)
-
     this.container = new ContainerFactory().createFromDslObject(obj)
-
-    console.log(this.container)
 
   }
 
