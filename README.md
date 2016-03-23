@@ -31,7 +31,7 @@ task('start-my-container')
 })
 
 task('kill-my-container')
-.get('my-container')
+.get('my-container', {quiet: true})
 .do(container => {
 
   return container.remove()

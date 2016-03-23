@@ -24,11 +24,12 @@ export default class ContainerAction {
   }
 
   /**
+   * Gets the actual containers from the obtaining models.
    * @return {Promise<Container[]>}
    */
   getContainers() {
 
-    return Promise.all(this.obtains.map(obtain => obtain.obtain()))
+    return Promise.all(this.obtains.map(obtain => obtain.obtain())).then(containers => containers.filter(container => container != null))
 
   }
 

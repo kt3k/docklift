@@ -8,12 +8,14 @@ export default class ContainerGet extends ContainerObtain {
 
   /**
    * @param {string} name The name of container
+   * @param {boolean} [quiet=false] If true then does not throw error when container not found, otherwise throws
    */
-  constructor(name) {
+  constructor(name, {quiet} = {}) {
 
     super()
 
     this.containerName = name
+    this.quiet = quiet || false
 
   }
 
@@ -25,7 +27,7 @@ export default class ContainerGet extends ContainerObtain {
 
     return new ContainerRepository().getByName(this.containerName).then(container => {
 
-      if (container == null) {
+      if (container == null && !this.quiet) {
 
         throw new Error('Cannot get container of the name: ' + this.containerName)
 

@@ -102,4 +102,53 @@ describe('task(taksName).get(name).do(action)', () => {
 
   })
 
+  it('throws when the container not found', (done) => {
+
+    task('not-found')
+    .get('not-found')
+    .do(container => container.anything())
+
+    start(['not-found'], (err) => {
+
+      try {
+
+        expect(err).to.be.instanceof(Error)
+        expect(err.message).to.equal('Cannot get container of the name: not-found')
+
+        done()
+
+      } catch (e) {
+
+        reject(e)
+
+      }
+
+    })
+
+  })
+
+  it('does not throws if the quiet flag is true, and the action is skipped', (done) => {
+
+    task('not-found')
+    .get('not-found', {quiet: true})
+    .do(container => container.anything())
+
+    start(['not-found'], err => {
+
+      try {
+
+        expect(err).to.equal(null)
+
+        done()
+
+      } catch (e) {
+
+        done(e)
+
+      }
+
+    })
+
+  })
+
 })

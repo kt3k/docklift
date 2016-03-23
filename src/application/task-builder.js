@@ -40,16 +40,17 @@ export default class TaskBuilder {
   /**
    * Add container get entry(ies).
    * @param {string|string[]} names The name(s) of the container(s)
+   * @param {object} param The parameters for getting containers
    */
-  containerGet(names) {
+  containerGet(names, params) {
 
     if (names instanceof Array) {
 
-      this.containerGetMulti(names)
+      this.containerGetMulti(names, params)
 
     } else {
 
-      this.containerGetSingle(names)
+      this.containerGetSingle(names, params)
 
     }
 
@@ -58,20 +59,22 @@ export default class TaskBuilder {
   /**
    * Add container get entry.
    * @param {string} name The name of the container
+   * @param {object} param The parameters for getting containers
    */
-  containerGetSingle(name) {
+  containerGetSingle(name, params) {
 
-    this.currentAction.addContainerObtain(new ContainerGet(name))
+    this.currentAction.addContainerObtain(new ContainerGet(name, params))
 
   }
 
   /**
    * Add container get entries.
    * @param {string[]} names The names of containers
+   * @param {object} param The parameters for getting containers
    */
-  containerGetMulti(names) {
+  containerGetMulti(names, params) {
 
-    names.forEach(name => this.addContainerGetSingle(name))
+    names.forEach(name => this.addContainerGetSingle(name, params))
 
   }
 

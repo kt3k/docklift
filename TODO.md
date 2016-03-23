@@ -1,4 +1,5 @@
 # TODO
+
 - use sinon in remove test because actual remove calls cause error in circle ci
 - Add volumes feature
 - Add env var feature
@@ -48,6 +49,7 @@
 - wait      Block until a container stops, then print its exit code
 
 # DONE
+- Add get-quiet
 - cmd feature
 - circle ci test
 - port feature
