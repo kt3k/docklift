@@ -124,11 +124,11 @@ describe('task(taksName).get(name).do(action)', () => {
 
     .then(() => container.start())
 
-    .then(() => new Promise(resolve => start(['remove'], (err) => {
+    .then(() => new Promise((resolve, reject) => start(['remove'], (err) => {
 
       if (err) {
 
-        throw err
+        return reject(err)
 
       }
 
