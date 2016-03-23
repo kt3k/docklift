@@ -191,4 +191,23 @@ describe('task(taksName).get(name).do(action)', () => {
 
   })
 
+  it('can get multiple items when an array is given', done => {
+
+    task('multiple-get')
+    .create({image: 'ubuntu', cmd: 'vi', name: 'm-get0'})
+    .create({image: 'ubuntu', cmd: 'vi', name: 'm-get1'})
+    .do(container => container.start())
+    .get(['m-get0', 'm-get1'])
+    .do(container => container.remove())
+
+    start(['multiple-get'], err => {
+
+      if (err) { return done(err) }
+
+      done()
+
+    })
+
+  })
+
 })

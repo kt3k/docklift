@@ -1,5 +1,4 @@
 # TODO
-
 - Show logs when the container start doing something
 - use sinon in remove test because actual remove calls cause error in circle ci
 - Add volumes feature
