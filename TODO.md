@@ -1,5 +1,6 @@
 # TODO
 
+- Fix bug of multiple container / action pair cases i.e. task('foo').get('bar').do(() => 0).get('baz').do(() => 0)
 - use sinon in remove test because actual remove calls cause error in circle ci
 - Add volumes feature
 - Add env var feature
