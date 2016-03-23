@@ -39,4 +39,15 @@ export default class ContainerGet extends ContainerObtain {
 
   }
 
+  /**
+   * Creates an instance.
+   * @param {string} name The name of container
+   * @param {object} params The parameter
+   */
+  static createOne(name, params) {
+
+    return new ContainerGet(name, params)
+
+  }
+
 }

@@ -28,4 +28,14 @@ export default class ContainerCreate extends ContainerObtain {
 
   }
 
+  /**
+   * Creates an instance
+   * @param {object} createOpts The container create options
+   */
+  static createOne(createOpts, params) {
+
+    return new ContainerCreate(createOpts)
+
+  }
+
 }
