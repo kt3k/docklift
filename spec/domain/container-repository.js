@@ -1,4 +1,4 @@
-import {containerRepository as repo, dice} from '../helper'
+import {containerRepository as repo, dice, skipOnCI} from '../helper'
 import Container from '../../src/domain/container'
 import {expect} from 'chai'
 
@@ -6,7 +6,7 @@ describe('ContainerRepository', () => {
 
   describe('remove', () => {
 
-    it.skipOnCI('removes the container', () => {
+    skipOnCI(it)('removes the container', () => {
 
       const name = `test${dice()}`
       const container = new Container({name: name, image: 'siomiz/chrome'})

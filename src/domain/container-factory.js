@@ -26,22 +26,11 @@ export default class ContainerFactory {
 
     } else {
 
-      throw new Error('ports are invalid: ' + ports)
+      throw new Error('ports are invalid: ' + obj.ports)
 
     }
 
     return new Container(obj)
-  }
-
-  /**
-   * Creates a container from the given name.
-   * @param {string} name The name of the container
-   * @return {Container}
-   */
-  createFromName(name) {
-
-    return new Container({name})
-
   }
 
 }

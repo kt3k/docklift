@@ -2,6 +2,7 @@ import {task, start, isEmpty} from '../src'
 import ContainerRepository from '../src/domain/container-repository'
 import ContainerFactory from '../src/domain/container-factory'
 import Container from '../src/domain/container'
+import './helper'
 
 import {expect} from 'chai'
 
