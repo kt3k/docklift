@@ -95,7 +95,7 @@ export default class ContainerRepository {
 
     if (!(ports instanceof Array)) {
 
-      return portBindings
+      return null
 
     }
 
