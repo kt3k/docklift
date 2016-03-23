@@ -98,4 +98,14 @@ export default class ContainerAction {
 
   }
 
+  /**
+   * Returns true iff the action is ready to execute.
+   * @return {boolean}
+   */
+  readyToGo() {
+
+    return this.hasAction() && this.hasContainer()
+
+  }
+
 }

@@ -3,13 +3,16 @@ import ContainerCreate from './container-create'
 import ContainerGet from './container-get'
 import Task from './task'
 
+/**
+ * The builder of the task. Registers container/action pairs to the task object.
+ */
 export default class TaskBuilder {
 
   constructor(taskName) {
 
     this.task = new Task(taskName)
-    this.currentAction = new ContainerAction()
-    this.task.addContainerAction(this.currentAction)
+
+    this.startBuildingNewAction()
 
   }
 
@@ -19,6 +22,16 @@ export default class TaskBuilder {
   getTask() {
 
     return this.task
+
+  }
+
+  /**
+   * Starts building a new contaienr action.
+   */
+  startBuildingNewAction() {
+
+    this.currentAction = new ContainerAction()
+    this.task.addContainerAction(this.currentAction)
 
   }
 
@@ -43,6 +56,12 @@ export default class TaskBuilder {
    * @param {object} param The parameters for getting containers
    */
   containerGet(names, params) {
+
+    if (this.currentAction.readyToGo()) {
+
+      this.startBuildingNewAction()
+
+    }
 
     if (names instanceof Array) {
 
@@ -83,6 +102,12 @@ export default class TaskBuilder {
    * @param {object|object[]} params The params of the container creations
    */
   containerCreate(params) {
+
+    if (this.currentAction.readyToGo()) {
+
+      this.startBuildingNewAction()
+
+    }
 
     if (params instanceof Array) {
 

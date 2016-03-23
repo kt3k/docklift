@@ -1,6 +1,6 @@
 # TODO
 
-- Fix bug of multiple container / action pair cases i.e. task('foo').get('bar').do(() => 0).get('baz').do(() => 0)
+- Show logs when the container start doing something
 - use sinon in remove test because actual remove calls cause error in circle ci
 - Add volumes feature
 - Add env var feature
@@ -50,6 +50,7 @@
 - wait      Block until a container stops, then print its exit code
 
 # DONE
+- Fix bug of multiple container / action pair cases i.e. task('foo').get('bar').do(() => 0).get('baz').do(() => 0)
 - Add get-quiet
 - cmd feature
 - circle ci test

@@ -1,8 +1,6 @@
 import {task, start, isEmpty} from '../src'
-import ContainerRepository from '../src/domain/container-repository'
-import ContainerFactory from '../src/domain/container-factory'
 import Container from '../src/domain/container'
-import './helper'
+import {containerRepository, containerFactory} from './helper'
 
 import {expect} from 'chai'
 
@@ -36,15 +34,11 @@ describe('task(taksName).create(params).do(action)', () => {
 
       if (err) {
 
-        console.log(err)
-
-        done(err)
-
-        return
+        return done(err)
 
       }
 
-      new ContainerRepository().getByName('foo0')
+      containerRepository.getByName('foo0')
 
       .then(container => {
 
@@ -65,6 +59,51 @@ describe('task(taksName).create(params).do(action)', () => {
 
   })
 
+  it('can add multiple container-action pairs', done => {
+
+    task('multi-create')
+    .create({
+      name: 'multi-create0',
+      image: 'ubuntu',
+      cmd: 'vi',
+      ports: '9123:9123'
+    })
+    .do(container => container.start())
+    .create({
+      name: 'multi-create1',
+      image: 'ubuntu',
+      cmd: 'vi',
+      ports: '9124:9124'
+    })
+    .do(container => container.start())
+
+    start(['multi-create'], err => {
+
+      if (err) {
+
+        return done(err)
+
+      }
+
+      Promise.all([
+        containerRepository.getByName('multi-create0').then(container => {
+
+          expect(container).to.exist
+          containerRepository.remove(container)
+
+        }),
+        containerRepository.getByName('multi-create1').then(container => {
+
+          expect(container).to.exist
+          containerRepository.remove(container)
+
+        }),
+      ]).then(() => done(), done)
+
+    })
+
+  })
+
 })
 
 describe('task(taksName).get(name).do(action)', () => {
@@ -75,13 +114,13 @@ describe('task(taksName).get(name).do(action)', () => {
     .get('foo1')
     .do(container => container.remove())
 
-    const container = new ContainerFactory().createFromDslObject({
+    const container = containerFactory.createFromDslObject({
       name: 'foo1',
       image: 'ubuntu',
       cmd: 'vi'
     })
 
-    new ContainerRepository().save(container)
+    containerRepository.save(container)
 
     .then(() => container.start())
 
@@ -93,7 +132,7 @@ describe('task(taksName).get(name).do(action)', () => {
 
       }
 
-      resolve(new ContainerRepository().getByName('foo1'))
+      resolve(containerRepository.getByName('foo1'))
 
     }))).then(container => {
 

@@ -10,7 +10,7 @@
     "test": "_mocha -t 10000 --require babel-register spec/index.js spec/**/*",
     "test-stop": "babel-node casual-tests/stop-container.js",
     "cov": "nyc --reporter=lcov npm test",
-    "docker-rm-all": "docker rm -f `docker ps -aq`",
+    "docker-rm": "docker rm -f `docker ps -aq`",
     "lint": "souffle",
     "clean": "rimraf lib coverage",
     "dist": "babel src -d lib",
