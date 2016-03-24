@@ -62,7 +62,7 @@ import {task} from 'docklift'
 
 Creates and registers a task of the given name. Returns task modifier and you can define your own container actions in the task.
 
-## taskModifier.create({name, image, cmd, ports}[, ...]).do(action)
+## task().create({name, image, cmd, ports}[, ...]).do(action)
 
 - @param {string} name The name of the container
 - @param {string} image The image of the container (necessary only when creating container)
@@ -72,7 +72,7 @@ Creates and registers a task of the given name. Returns task modifier and you ca
 
 Creates the container(s) and perform the action(s) on it.
 
-## taskModifier.get(names).do(action)
+## task().get(names).do(action)
 
 - @param {string|string[]} names The names of the container to get
 - @param {Function} action The action to perform
