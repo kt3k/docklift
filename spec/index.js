@@ -211,3 +211,18 @@ describe('task(taksName).get(name).do(action)', () => {
   })
 
 })
+
+describe('task(taskName).do(action)', () => {
+
+  it('throws because no container is specified', () => {
+
+    expect(() => {
+
+      task('no-container')
+      .do(container => container.start())
+
+    }).to.throw(Error)
+
+  })
+
+})
