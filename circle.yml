@@ -6,3 +6,7 @@ dependencies:
   override:
     - docker pull ubuntu
     - docker pull siomiz/chrome
+
+test:
+  post:
+    - npm run codecov
