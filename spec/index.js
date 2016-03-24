@@ -1,6 +1,6 @@
 import {task, start, isEmpty} from '../src'
 import Container from '../src/domain/container'
-import {containerRepository, containerFactory} from './helper'
+import {containerRepository, containerFactory, skipOnCI} from './helper'
 
 import {expect} from 'chai'
 
@@ -108,7 +108,7 @@ describe('task(taksName).create(params).do(action)', () => {
 
 describe('task(taksName).get(name).do(action)', () => {
 
-  it('gets the container of the name and performs the action on it', (done) => {
+  skipOnCI(it)('gets the container of the name and performs the action on it', (done) => {
 
     task('remove')
     .get('foo1')
@@ -191,7 +191,7 @@ describe('task(taksName).get(name).do(action)', () => {
 
   })
 
-  it('can get multiple items when an array is given', done => {
+  skipOnCI(it)('can get multiple items when an array is given', done => {
 
     task('multiple-get')
     .create({image: 'ubuntu', cmd: 'vi', name: 'm-get0'})
