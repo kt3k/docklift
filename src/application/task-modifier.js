@@ -30,15 +30,6 @@ export function createTask(taskName, deps) {
     },
 
     /**
-     * @return {object}
-     */
-    get container() {
-
-      return modifier
-
-    },
-
-    /**
      * Adds the way of getting a container
      * @param {string|string[]} names The names of the containers
      * @param {object} param The parameters for getting containers
