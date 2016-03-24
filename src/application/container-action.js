@@ -1,4 +1,5 @@
 import {Promise} from '../util'
+import ContainerLoggingService from './container-logging-service'
 
 /**
  * The pair of the list of the ways of obtaining containers and the list of actions on them.
@@ -21,23 +22,25 @@ export default class ContainerAction {
 
   /**
    * Gets the actual containers from the obtaining models.
-   * @return {Promise<Container[]>}
+   * @return {Promise<ContainerLoggingService[]>}
    */
   getContainers() {
 
-    return Promise.all(this.obtains.map(obtain => obtain.obtain())).then(containers => containers.filter(container => container != null))
+    return Promise.all(this.obtains.map(obtain => obtain.obtain())).then(containers =>
+      containers
+      .filter(container => container != null)
+      .map(container => this.createLoggingService(container))
+    )
 
   }
 
   /**
-   * Applies the action on the given containers.
-   * @param {Function} action The behavior of the action
-   * @param {Container[]} containers The containers
+   * Creates the container logging service.
+   * @param {Container} container The container
+   * @return {ContainerLoggingService}
    */
-  applyActionToContainers(action, containers) {
-
-    return Promise.all(containers.map(container => action(container)))
-
+  createLoggingService(container) {
+    return new ContainerLoggingService(container)
   }
 
   /**
@@ -48,7 +51,7 @@ export default class ContainerAction {
 
     return this.getContainers().then(containers => this.actions.reduce((promise, action) => {
 
-      return promise.then(() => this.applyActionToContainers(action, containers))
+      return promise.then(() => Promise.all(containers.map(action)))
 
     }, Promise.resolve()))
 
