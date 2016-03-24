@@ -97,7 +97,7 @@ describe('task(taksName).create(params).do(action)', () => {
           expect(container).to.exist
           containerRepository.remove(container)
 
-        }),
+        })
       ]).then(() => done(), done)
 
     })
@@ -124,7 +124,7 @@ describe('task(taksName).get(name).do(action)', () => {
 
     .then(() => container.start())
 
-    .then(() => new Promise((resolve, reject) => start(['remove'], (err) => {
+    .then(() => new Promise((resolve, reject) => start(['remove'], err => {
 
       if (err) {
 
@@ -132,7 +132,7 @@ describe('task(taksName).get(name).do(action)', () => {
 
       }
 
-      resolve(containerRepository.getByName('foo1'))
+      return resolve(containerRepository.getByName('foo1'))
 
     }))).then(container => {
 
@@ -148,7 +148,7 @@ describe('task(taksName).get(name).do(action)', () => {
     .get('not-found')
     .do(container => container.anything())
 
-    start(['not-found'], (err) => {
+    start(['not-found'], err => {
 
       try {
 
@@ -159,7 +159,7 @@ describe('task(taksName).get(name).do(action)', () => {
 
       } catch (e) {
 
-        reject(e)
+        done(e)
 
       }
 

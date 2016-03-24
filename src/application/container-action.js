@@ -1,8 +1,4 @@
 import {Promise} from '../util'
-import ContainerRepository from '../domain/container-repository'
-import Container from '../domain/container'
-
-const repository = new ContainerRepository()
 
 /**
  * The pair of the list of the ways of obtaining containers and the list of actions on them.

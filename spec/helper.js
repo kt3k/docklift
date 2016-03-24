@@ -1,11 +1,7 @@
 import ContainerFactory from '../src/domain/container-factory'
 import ContainerRepository from '../src/domain/container-repository'
 
-export const skipOnCI = it => {
-
-    return process.env.CI === 'true' ? it.skip : it
-
-}
+export const skipOnCI = it => process.env.CI === 'true' ? it.skip : it
 
 export const containerFactory = new ContainerFactory()
 export const containerRepository = new ContainerRepository()

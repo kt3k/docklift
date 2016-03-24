@@ -9,8 +9,6 @@ export default class ContainerFactory {
    */
   createFromDslObject(obj) {
 
-    let ports
-
     if (typeof obj.ports === 'string') {
 
       // makes it singleton array
