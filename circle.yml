@@ -9,4 +9,5 @@ dependencies:
 
 test:
   post:
+    - npm run cov
     - npm run codecov
