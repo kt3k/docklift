@@ -1,4 +1,4 @@
-# docklift v0.7.0 [![Circle CI](https://circleci.com/gh/kt3k/docklift.svg?style=svg)](https://circleci.com/gh/kt3k/docklift)
+# docklift v0.7.0 [![Circle CI](https://circleci.com/gh/kt3k/docklift.svg?style=svg)](https://circleci.com/gh/kt3k/docklift) [![codecov.io](https://codecov.io/github/kt3k/docklift/coverage.svg?branch=master)](https://codecov.io/github/kt3k/docklift?branch=master)
 
 > Manage your docker containers from JavaScript
 
