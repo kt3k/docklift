@@ -35,7 +35,7 @@
   "dependencies": {
     "chalk": "^1.1.1",
     "dockerode": "^2.2.9",
-    "es6-promise": "^3.1.2",
+    "es6-promise": "^4.0.5",
     "interpret": "^1.0.0",
     "liftoff": "^2.2.0",
     "minimist": "^1.2.0",
@@ -47,9 +47,9 @@
     "babel-register": "^6.7.2",
     "chai": "^3.5.0",
     "codecov.io": "^0.1.6",
-    "mocha": "^2.4.5",
-    "npm-run-all": "^1.5.2",
-    "nyc": "^6.1.1",
+    "mocha": "^3.2.0",
+    "npm-run-all": "^4.0.1",
+    "nyc": "^10.0.0",
     "rimraf": "^2.5.2",
     "souffle-cli": "^3.1.0"
   },
